@@ -127,9 +127,19 @@ class ToDoListViewController: UITableViewController {
     //셀을 잡고 이동해서 정렬할수 있게 지원한다.
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         //셀을 이동한후, 데이터를 저장하여야 한다.
-//        let data
-        //요기 할 차례이지롱
         
+        //1. 전체 데이터 배열을 가져온후
+        var tasks = self.task
+        //2. 선택한 셀 , 이동전 위치를 가져옴
+        let newTask = tasks[sourceIndexPath.row]
+        
+        //3. 전체 데이터에서 이동전 데이터를 삭제함
+        tasks.remove(at: sourceIndexPath.row)
+        //4. 이동전 위치에 변경될 위치를 insert 함
+        tasks.insert(newTask, at: destinationIndexPath.row)
+        
+        //전체 데이터 전역 변수에, 가공한 전체 데이터를 넣음
+        self.task = tasks
     }
     
     //edit mode 일때 우측에 delete 를 보여준다, tableView list에서도 스와이프로 삭제를 지원한다.
